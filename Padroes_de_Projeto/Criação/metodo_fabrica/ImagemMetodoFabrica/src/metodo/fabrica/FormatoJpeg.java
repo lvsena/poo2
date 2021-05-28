@@ -8,8 +8,5 @@ public class FormatoJpeg implements Formato{
     public Imagem gera() {
         System.out.println("gera jpeg");
         return null;
-    }
-    
-    
-    
+    }    
 }
