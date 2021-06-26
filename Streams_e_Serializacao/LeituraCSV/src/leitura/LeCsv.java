@@ -1,6 +1,7 @@
 
 package leitura;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,17 +13,26 @@ public class LeCsv {
       
          LinkedList<Cliente> clientes = new  LinkedList<Cliente>();             
         String current = new java.io.File( "." ).getCanonicalPath();        
-        File inputFile = new File(current + "\\src\\arquivo.csv");                
+        File inputFile = new File(current + "//src//arquivo.csv");                
         FileReader in = new FileReader(inputFile);
-        int c;
-        while ((c = in.read()) != -1) {
-            c = in.read();            
-        }       
-        in.close(); 
+        BufferedReader csv = new BufferedReader(in);
+        String line = csv.readLine();
+
+        while((line = csv.readLine()) != null) {
+           String[] clienteData = line.split(";");
+           
+           Cliente newCliente = new Cliente();
+           newCliente.setId(clienteData[0]);
+           newCliente.setNome(clienteData[1]);
+           newCliente.setEmail(clienteData[2]);
+           newCliente.setTelefone(clienteData[4]);
+           newCliente.setTotalCompras(Double.parseDouble(clienteData[5]));
+           
+           clientes.add(newCliente);
+        }
         
-        //complete o codigo para ler o csv e criar as instancias de cliente.
-        //rode o teste MainReadCsvTest.java para testar o seu código.
-        
+        csv.close(); 
+    
         return clientes;
      }
 }
